@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Stay Hydrated</string>
+    <string-array name="water_goals">
+        <item>1 litr</item>
+        <item>1.5 litra</item>
+        <item>2 litry</item>
+        <item>2.5 litra</item>
+        <item>3 litry</item>
+        <item>3.5 litra</item>
+        <item>4 litry</item>
+    </string-array>
+
 </resources>
