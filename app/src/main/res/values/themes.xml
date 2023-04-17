@@ -3,6 +3,10 @@
     <style name="Base.Theme.StayHydrated" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:buttonTint">@color/dark_blue</item>
+        <item name="android:statusBarColor">@color/dark_blue</item>
+
     </style>
 
     <style name="Theme.StayHydrated" parent="Base.Theme.StayHydrated" />

@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         // Obliczenie procentowego postępu i aktualizacja ProgressBar oraz TextView
         val progressPercent = ((waterDrank / waterGoal) * 100).toInt()
         progressBar.progress = progressPercent
-        waterDrankTextView.text = "Wypiłeś już: ${waterDrank}l"
+        waterDrankTextView.text = "Wypito już: ${waterDrank}l"
         waterGoalInfoTextView.text = "Zostało do celu: ${(waterGoal - waterDrank)}l"
 
         // Dodanie akcji dla przycisku dodającego wodę
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
 
             // aktualizacja widoków w ProgressBar i TextView
             progressBar.progress = progressPercent
-            waterDrankTextView.text = "Wypiłeś już: ${waterDrank}l"
+            waterDrankTextView.text = "Wypito już: ${waterDrank}l"
             waterGoalInfoTextView.text = "Zostało do celu: ${(waterGoal - waterDrank)}l"
         }
 
