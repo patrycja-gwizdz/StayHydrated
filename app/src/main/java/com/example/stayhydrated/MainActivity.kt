@@ -1,15 +1,13 @@
 package com.example.stayhydrated
 
+import android.app.AlarmManager
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ProgressBar
-import android.widget.Spinner
 import android.widget.TextView
-import android.widget.Toast
 import java.util.concurrent.TimeUnit
 class MainActivity : AppCompatActivity() {
 
@@ -21,10 +19,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var waterGoalTextView: TextView
     private var waterDrank = 0.0f
     private var waterGoal = 0.0f
+    private lateinit var alarmManager: AlarmManager
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         addButton = findViewById(R.id.add_button)
         waterDrankTextView = findViewById(R.id.water_drank_text_view)
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         // Dodanie akcji dla przycisku dodającego wodę
         addButton.setOnClickListener {
+
             // pobranie wartości z pliku SharedPreferences
             val sharedPreferences = getSharedPreferences("stayHydratedPrefs", Context.MODE_PRIVATE)
             val savedDate = sharedPreferences.getLong("lastDate", 0L)
