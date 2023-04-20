@@ -59,8 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/dark_blue"
-        android:text="Wypiłem szklankę" />
-
+        />
 
     <TextView
         android:id="@+id/waterGoalTextView"
@@ -73,7 +72,8 @@
         android:id="@+id/buttonNoti"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Button"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/preferences_button"

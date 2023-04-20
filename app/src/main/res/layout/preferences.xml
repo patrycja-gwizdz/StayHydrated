@@ -31,6 +31,57 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Ustaw cel"
-        android:backgroundTint="@color/dark_blue" />
+        android:backgroundTint="@color/dark_blue"
+        android:text="Ustaw cel" />
+
+    <TextView
+        android:id="@+id/textWater"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wybierz miarę porcji wody:"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spinnerWater"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:spinnerMode="dropdown" />
+
+    <Button
+        android:id="@+id/buttonSetWater"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/dark_blue"
+        android:text="Ustaw miarę" />
+
+    <TextView
+        android:id="@+id/textAlarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wybierz częstotliwość powiadomień:"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spinnerAlarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:spinnerMode="dropdown" />
+
+    <Button
+        android:id="@+id/buttonSetAlarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/dark_blue"
+        android:text="Ustaw częstotliwość" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="201dp"
+        android:layout_marginTop="2pt"
+        app:srcCompat="@drawable/butelka2" />
 </LinearLayout>

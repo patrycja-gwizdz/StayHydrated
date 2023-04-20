@@ -9,5 +9,21 @@
         <item>3.5 litra</item>
         <item>4 litry</item>
     </string-array>
+    <string-array name="water">
+        <item>100 ml</item>
+        <item>200 ml</item>
+        <item>400 ml</item>
+        <item>500 ml</item>
+        <item>600 ml</item>
+        <item>800 ml</item>
+        <item>1000 ml</item>
+    </string-array>
+
+    <string-array name="alarm">
+        <item>2 minut</item>
+        <item>60 minut</item>
+        <item>90 minut</item>
+        <item>120 minut</item>
+    </string-array>
 
 </resources>

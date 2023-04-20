@@ -17,8 +17,8 @@ class AlarmReceiver: BroadcastReceiver() {
 
         val builder = NotificationCompat.Builder(context!!,"stayhydrated")
             .setSmallIcon(R.drawable.notification)
-            .setContentTitle("Uwaga woda")
-            .setContentText("Pij wode")
+            .setContentTitle("Nawodnij organizm!")
+            .setContentText("Kliknij i napij się wody!")
             .setAutoCancel(true)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setOngoing(true)

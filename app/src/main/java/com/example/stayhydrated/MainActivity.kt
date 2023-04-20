@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var pendingIntent: PendingIntent
     private lateinit var calendar: Calendar
 
-
-
+    private var alarmTime = 0
+    private var waterAmount = 0
     private var waterDrank = 0.0f
     private var waterGoal = 0.0f
 
@@ -59,36 +59,42 @@ class MainActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("stayHydratedPrefs", Context.MODE_PRIVATE)
         waterGoal = sharedPreferences.getFloat("waterGoal", 0.0f)
         waterDrank = sharedPreferences.getFloat("waterDrank", 0.0f)
+        waterAmount = sharedPreferences.getInt("waterml",0)
+        alarmTime = sharedPreferences.getInt("alarmTime",0)
+
 
         println(waterGoal)
         // Wyświetlenie informacji o celu picia wody
-        if (waterGoal != 0.0f) {
-            waterGoalTextView.text = "Twój cel picia wody na dziś to: $waterGoal litra"
-            // Obliczenie procentowego postępu i aktualizacja ProgressBar oraz TextView
-            val progressPercent = ((waterDrank / waterGoal) * 100).toInt()
-            progressBar.progress = progressPercent
-            waterDrankTextView.text = "Wypito już: ${waterDrank}l"
-            waterGoalInfoTextView.text = "Zostało do celu: ${(waterGoal - waterDrank)}l"
-            waterDrankPercentage.text = "$progressPercent%"
+        if ((waterGoal != 0.0f)&&(waterAmount != 0)&&(alarmTime != 0))
+        {
+                waterGoalTextView.text = "Twój cel picia wody na dziś to: $waterGoal litra"
+                // Obliczenie procentowego postępu i aktualizacja ProgressBar oraz TextView
+                val progressPercent = ((waterDrank / waterGoal) * 100).toInt()
+                progressBar.progress = progressPercent
+                waterDrankTextView.text = "Wypito już: ${String.format("%.1f", (waterDrank))}l"
+                waterGoalInfoTextView.text = "Zostało do celu: ${String.format("%.1f", (waterGoal - waterDrank))}l"
+                waterDrankPercentage.text = "$progressPercent%"
+                addButton.setText("Wypito ${waterAmount}ml")
 
-            if(progressPercent>99){
-                val imageOrder = findViewById<ImageView>(R.id.imageView3)
-                imageOrder.visibility = View.VISIBLE
-                waterGoalInfoTextView.text = "Osiągnięto dzienny cel!"
+                if (progressPercent > 99) {
+                    val imageOrder = findViewById<ImageView>(R.id.imageView3)
+                    imageOrder.visibility = View.VISIBLE
+                    waterGoalInfoTextView.text = "Osiągnięto dzienny cel!"
 
-            }
+                }
 
 
-            // Dodanie akcji dla przycisku dodającego wodę
-            addButton.setOnClickListener {
-                addWater()
+                // Dodanie akcji dla przycisku dodającego wodę
+                addButton.setOnClickListener {
+                    addWater()
 
-            }
+                }
         }
         else{
             progressBar.visibility = View.GONE
             addButton.visibility = View.GONE
-            waterGoalTextView.text = "Nie ustawiono celu aby korzystać z aplikacji to najpierw ustaw cel!"
+            waterGoalTextView.text = "Nie ustawiono celu lub ilości wody lub interwału powiadomień. Aby korzystać z aplikacji, to najpierw ustaw wszystkie potrzebne funkcje!"
+
 
         }
 
@@ -151,7 +157,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         // dodanie 0.25 litra do ilości wypitej wody
-        waterDrank += 0.25f
+
+        val sumWaterAmount = waterAmount.toFloat()/1000
+        waterDrank += sumWaterAmount
 
         // zapisanie aktualnej ilości wypitej wody do SharedPreferences
         val editor = sharedPreferences.edit()
@@ -161,21 +169,21 @@ class MainActivity : AppCompatActivity() {
         // Obliczenie procentowego postępu i aktualizacja ProgressBar oraz TextView
         val progressPercent = ((waterDrank / waterGoal) * 100).toInt()
         progressBar.progress = progressPercent
-        waterDrankTextView.text = "Wypito już: ${waterDrank}l"
-        waterGoalInfoTextView.text = "Zostało do celu: ${(waterGoal - waterDrank)}l"
+        waterDrankTextView.text = "Wypito już: ${ String.format("%.1f", (waterDrank))}l"
+        waterGoalInfoTextView.text = "Zostało do celu: ${ String.format("%.1f", (waterGoal - waterDrank))}l"
         waterDrankPercentage.text = "$progressPercent%"
 
         if(progressPercent>99){
             val imageOrder = findViewById<ImageView>(R.id.imageView3)
             imageOrder.visibility = View.VISIBLE
             Toast.makeText(this,"Brawo! Osiągnięto dzienny cel!",Toast.LENGTH_SHORT).show()
-            waterGoalTextView.text = "Osiągnięto dzienny cel!"
+            waterGoalInfoTextView.text = "Osiągnięto dzienny cel!"
 
         }
         else {
             calendar = Calendar.getInstance()
             calendar.timeInMillis = System.currentTimeMillis()
-            calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE) + 2)
+            calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE) + alarmTime)
             calendar.set(Calendar.SECOND, 0)
             calendar.set(Calendar.MILLISECOND, 0)
             setAlarm()
@@ -196,7 +204,7 @@ class MainActivity : AppCompatActivity() {
 
 
         println(calendar.timeInMillis)
-        Toast.makeText(this,"alarm",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,"Wypito wodę, ustawiono przypomnienie!",Toast.LENGTH_SHORT).show()
 
     }
 
@@ -218,6 +226,12 @@ class MainActivity : AppCompatActivity() {
             waterDrankTextView.text = "Wypiłeś już: 0.0l"
             progressBar.progress = 0
             waterGoalInfoTextView.text = "Zostało do celu: ${waterGoal}l"
+            waterDrankPercentage.visibility=View.GONE
+
+            val imageOrder = findViewById<ImageView>(R.id.imageView3)
+            imageOrder.visibility = View.GONE
+
+
         }
     }
 
